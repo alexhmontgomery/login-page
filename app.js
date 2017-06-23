@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
   var pathname = parseurl(req).pathname
   // count the views
   views[pathname] = (views[pathname] || 0) + 1
-  next()
+  return next()
 })
 
 app.get('/', function (req, res, next) {
@@ -44,7 +44,7 @@ app.get('/', function (req, res, next) {
   }
 
   if (userTrue === 1) {
-    res.render('index', {
+    return res.render('index', {
       user: sess.username,
       pass: sess.password,
       views: (sess.views['/count'])
@@ -52,20 +52,20 @@ app.get('/', function (req, res, next) {
   } else {
     console.log('false')
         // redirect to /login page and ask to login
-    res.redirect('/login')
+    return res.redirect('/login')
   }
 })
 
 app.get('/login', function (req, res, next) {
-  res.render('login', {invalid: invalidPassword})
+  return res.render('login', {invalid: invalidPassword})
 })
 
 app.post('/counter', function (req, res) {
-  res.redirect('/count')
+  return res.redirect('/count')
 })
 
 app.get('/count', function (req, res, next) {
-  res.redirect('/')
+  return res.redirect('/')
 })
 
 app.post('/login', function (req, res) {
@@ -74,17 +74,17 @@ app.post('/login', function (req, res) {
   sess.password = req.body.password
   for (var i = 0; i < database.length; i++) {
     if (database[i].username === sess.username && database[i].password === sess.password) {
-      res.redirect('/')
+      return res.redirect('/')
     } else if (database[i].username === sess.username && database[i].password !== sess.password) {
       invalidPassword = 'Your password was incorrect'
-      res.redirect('/login')
+      return res.redirect('/login')
     }
   }
-  res.redirect('/signup')
+  return res.redirect('/signup')
 })
 
 app.get('/signup', function (req, res) {
-  res.render('signup')
+  return res.render('signup')
 })
 
 app.post('/signup', function (req, res) {
@@ -94,7 +94,7 @@ app.post('/signup', function (req, res) {
   let newUser = {username: sess.username, password: sess.password}
   database.push(newUser)
 
-  res.redirect('/')
+  return res.redirect('/')
 })
 
 app.post('/logout', function (req, res) {
@@ -105,11 +105,11 @@ app.post('/logout', function (req, res) {
   sess.username = ''
   sess.password = ''
   sess.views['/count'] = 0
-  res.redirect('/')
+  return res.redirect('/')
 })
 
 app.post('/createAccount', function (req, res) {
-  res.redirect('/signup')
+  return res.redirect('/signup')
 })
 
 app.listen(3000, function () {

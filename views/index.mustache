@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>Welcome to the totally secure site</h1>
-    <h2>Hello {{user}}</h2>
+    <h2>Hello {{user}}!</h2>
 
     <form class="" action="/logout" method="post">
       <button type="submit" name="logout">Log Out</button>
@@ -15,8 +15,8 @@
     <br>
     <h3>Play the button click game:</h3>
     <form class="" action="/counter" method="post">
-      <button type="submit" name="button">You clicked me: {{#views}}{{views}}{{/views}}{{^views}}0{{/views}} times!</button>
+      <button type="submit" name="button">You have clicked me: {{#views}}{{views}}{{/views}}{{^views}}0{{/views}} times!</button>
     </form>
-    
+
   </body>
 </html>
