@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+  </head>
+  <body>
+    <h1>Welcome to the totally secure site</h1>
+    <h2>Hello {{user}}</h2>
+
+    <form class="" action="/logout" method="post">
+      <button type="submit" name="logout">Log Out</button>
+    </form>
+
+    <br>
+    <h3>Play the button click game:</h3>
+    <form class="" action="/counter" method="post">
+      <button type="submit" name="button">You clicked me: {{#views}}{{views}}{{/views}}{{^views}}0{{/views}} times!</button>
+    </form>
+    
+  </body>
+</html>
